@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Priyanka Gupta — Product Leader &amp; Strategist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ============ TOKENS ============ */
+:root{
+  --ink:#0C0A16;
+  --ink-soft:#161228;
+  --ink-line: rgba(230,226,250,0.14);
+  --ink-line-soft: rgba(230,226,250,0.08);
+  --text-ink:#EEEAFB;
+  --text-ink-muted:#A199C2;
+
+  --paper:#F1EFFA;
+  --paper-dim:#E4E0F1;
+  --paper-line: rgba(15,10,30,0.14);
+  --paper-line-soft: rgba(15,10,30,0.08);
+  --text-paper:#15111F;
+  --text-paper-muted:#5C5470;
+
+  --brass:#5B5FE0;
+  --brass-bright:#8B8FF6;
+  --brass-deep:#3B37A6;
+
+  --display: "Fraunces", serif;
+  --body: "IBM Plex Sans", sans-serif;
+  --mono: "IBM Plex Mono", monospace;
+
+  --wrap: 1180px;
+  --ease: cubic-bezier(.22,.68,.16,1);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:var(--body);
+  background:var(--ink);
+  color:var(--text-ink);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img,svg{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;}
+ul{list-style:none;}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
+}
+
+:focus-visible{
+  outline:2px solid var(--brass-bright);
+  outline-offset:3px;
+}
+
+.wrap{max-width:var(--wrap); margin:0 auto; padding:0 32px;}
+@media (max-width:640px){ .wrap{padding:0 22px;} }
+
+.section{ padding:120px 0; position:relative; }
+@media (max-width:800px){ .section{ padding:80px 0; } }
+.section--paper{ background:var(--paper); color:var(--text-paper); }
+.section--ink{ background:var(--ink); color:var(--text-ink); }
+
+.eyebrow{
+  font-family:var(--mono);
+  font-size:12.5px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--brass-bright);
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:22px;
+}
+.section--paper .eyebrow{ color:var(--brass-deep); }
+.eyebrow::before{
+  content:"";
+  width:26px; height:1px;
+  background:currentColor;
+  opacity:.7;
+}
+
+h1,h2,h3,h4{ font-family:var(--display); font-weight:500; letter-spacing:-.01em; }
+
+.section-head{ max-width:640px; margin-bottom:64px; }
+.section-title{ font-size:clamp(30px,4vw,46px); line-height:1.08; font-weight:500; }
+.section-sub{ margin-top:18px; font-size:17px; line-height:1.6; color:var(--text-ink-muted); max-width:520px; }
+.section--paper .section-sub{ color:var(--text-paper-muted); }
+
+/* ============ NAV ============ */
+.nav{
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  padding:22px 0;
+  transition:background .4s var(--ease), border-color .4s var(--ease), padding .3s var(--ease);
+  border-bottom:1px solid transparent;
+}
+.nav.is-scrolled{
+  background:rgba(13,12,10,.86);
+  backdrop-filter:blur(10px);
+  border-bottom-color:var(--ink-line-soft);
+  padding:15px 0;
+}
+.nav-inner{ display:flex; align-items:center; justify-content:space-between; }
+.nav-mark{
+  font-family:var(--display); font-size:20px; font-weight:600; letter-spacing:.01em;
+  color:var(--text-ink);
+}
+.nav-mark span{ color:var(--brass-bright); }
+.nav-links{ display:flex; gap:34px; align-items:center; }
+.nav-links a{
+  font-family:var(--mono); font-size:12.5px; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--text-ink-muted);
+  transition:color .25s;
+  position:relative;
+  padding-bottom:2px;
+}
+.nav-links a:hover{ color:var(--text-ink); }
+.nav-links a::after{
+  content:""; position:absolute; left:0; right:100%; bottom:-3px; height:1px; background:var(--brass-bright);
+  transition:right .3s var(--ease);
+}
+.nav-links a:hover::after{ right:0; }
+.nav-cta{
+  font-family:var(--mono); font-size:12.5px; letter-spacing:.05em;
+  border:1px solid var(--ink-line); padding:9px 18px; border-radius:2px;
+  transition:border-color .25s, background .25s;
+}
+.nav-cta:hover{ border-color:var(--brass-bright); background:var(--ink-line-soft); }
+@media (max-width:860px){
+  .nav-links{ display:none; }
+}
+
+/* ============ HERO ============ */
+.hero{
+  min-height:100vh;
+  display:flex; flex-direction:column; justify-content:center;
+  background:
+    radial-gradient(ellipse 900px 600px at 82% -10%, rgba(91,95,224,.18), transparent 60%),
+    var(--ink);
+  padding-top:140px; padding-bottom:80px;
+  position:relative;
+}
+.hero-eyebrow-row{
+  display:flex; align-items:center; gap:14px; margin-bottom:34px;
+  font-family:var(--mono); font-size:12.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--text-ink-muted);
+}
+.hero-eyebrow-row .dot{ width:6px; height:6px; border-radius:50%; background:var(--brass-bright); }
+.hero-name{
+  font-size:clamp(52px,9vw,124px);
+  line-height:.98;
+  font-weight:500;
+  letter-spacing:-.02em;
+  max-width:14ch;
+}
+.hero-role{
+  margin-top:26px;
+  font-family:var(--mono);
+  font-size:clamp(14px,1.6vw,17px);
+  letter-spacing:.04em;
+  color:var(--brass-bright);
+}
+.hero-lede{
+  margin-top:34px;
+  font-family:var(--display);
+  font-style:italic;
+  font-weight:300;
+  font-size:clamp(21px,2.6vw,32px);
+  line-height:1.38;
+  max-width:760px;
+  color:var(--text-ink);
+}
+.hero-support{
+  margin-top:22px; max-width:600px; font-size:16.5px; line-height:1.7; color:var(--text-ink-muted);
+}
+.hero-tags{
+  margin-top:38px; display:flex; flex-wrap:wrap; gap:10px 0; align-items:center;
+  font-family:var(--mono); font-size:13px; letter-spacing:.03em; color:var(--text-ink-muted);
+}
+.hero-tags .sep{ margin:0 14px; color:var(--brass); opacity:.6; }
+.hero-actions{ margin-top:54px; display:flex; flex-wrap:wrap; gap:18px; align-items:center; }
+.btn{
+  font-family:var(--mono); font-size:13px; letter-spacing:.04em; text-transform:uppercase;
+  padding:16px 30px; border-radius:2px;
+  display:inline-flex; align-items:center; gap:10px;
+  transition:transform .3s var(--ease), background .3s, border-color .3s, color .3s;
+}
+.btn-primary{
+  background:var(--brass-bright); color:var(--ink); font-weight:500;
+}
+.btn-primary:hover{ background:var(--text-ink); transform:translateY(-2px); }
+.btn-ghost{
+  border:1px solid var(--ink-line); color:var(--text-ink);
+}
+.btn-ghost:hover{ border-color:var(--brass-bright); transform:translateY(-2px); }
+.section--paper .btn-ghost{ border-color:var(--paper-line); }
+.section--paper .btn-ghost:hover{ border-color:var(--brass-deep); }
+.hero-contact{
+  margin-top:64px; display:flex; gap:28px; flex-wrap:wrap;
+  font-family:var(--mono); font-size:12.5px; letter-spacing:.04em; color:var(--text-ink-muted);
+  border-top:1px solid var(--ink-line-soft); padding-top:22px; max-width:600px;
+}
+.hero-contact a{ color:var(--text-ink); border-bottom:1px solid var(--brass); padding-bottom:1px; }
+.hero-contact a:hover{ color:var(--brass-bright); }
+
+/* ============ WHAT I DO ============ */
+.do-grid{ display:grid; grid-template-columns:1fr 1.15fr; gap:60px; }
+@media (max-width:900px){ .do-grid{ grid-template-columns:1fr; gap:8px; } }
+.do-list{ border-top:1px solid var(--paper-line); }
+.do-item{ border-bottom:1px solid var(--paper-line); }
+.do-item-btn{
+  width:100%; display:flex; align-items:center; justify-content:space-between; gap:20px;
+  padding:26px 4px; text-align:left;
+}
+.do-item-num{ font-family:var(--mono); font-size:12px; color:var(--brass-deep); width:26px; flex-shrink:0; }
+.do-item-name{ font-family:var(--display); font-size:clamp(19px,2.4vw,27px); font-weight:500; flex:1; transition:color .25s; }
+.do-item-btn:hover .do-item-name, .do-item.is-active .do-item-name{ color:var(--brass-deep); }
+.do-item-arrow{ font-family:var(--mono); font-size:16px; color:var(--text-paper-muted); transition:transform .3s var(--ease); }
+.do-item.is-active .do-item-arrow{ transform:rotate(45deg); color:var(--brass-deep); }
+.do-item-panel{
+  display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s var(--ease);
+}
+.do-item-panel-inner{ overflow:hidden; }
+.do-item.is-active .do-item-panel{ grid-template-rows:1fr; }
+.do-item-desc{ padding:0 4px 26px 30px; font-size:15.5px; line-height:1.65; color:var(--text-paper-muted); max-width:44ch; }
+.do-visual{
+  position:relative; border:1px solid var(--paper-line); background:var(--paper-dim);
+  min-height:420px; padding:44px; display:flex; flex-direction:column; justify-content:space-between;
+  overflow:hidden;
+}
+@media (max-width:900px){ .do-visual{ display:none; } }
+.do-visual-eyebrow{ font-family:var(--mono); font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--text-paper-muted); }
+.do-visual-title{ font-family:var(--display); font-size:clamp(26px,2.8vw,36px); line-height:1.15; margin-top:20px; transition:opacity .35s var(--ease); }
+.do-visual-desc{ font-size:15.5px; line-height:1.7; color:var(--text-paper-muted); margin-top:18px; max-width:38ch; }
+.do-visual-index{ font-family:var(--mono); font-size:80px; color:var(--paper-line); position:absolute; right:36px; bottom:20px; line-height:1; transition:color .3s; }
+
+/* ============ SELECTED WORK ============ */
+.work-list{ border-top:1px solid var(--ink-line); }
+.case{ border-bottom:1px solid var(--ink-line); scroll-margin-top:110px; }
+.case-toggle{
+  width:100%; display:grid; grid-template-columns:60px 1fr auto 30px; align-items:center; gap:24px;
+  padding:34px 4px; text-align:left;
+}
+@media (max-width:800px){ .case-toggle{ grid-template-columns:40px 1fr 26px; } }
+.case-index{ font-family:var(--mono); font-size:14px; color:var(--brass); }
+.case-titles{ display:flex; flex-direction:column; gap:6px; }
+.case-client{ font-family:var(--mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--text-ink-muted); }
+.case-name{ font-family:var(--display); font-size:clamp(20px,2.6vw,30px); font-weight:500; line-height:1.15; }
+.case-caps{ font-family:var(--mono); font-size:11.5px; color:var(--text-ink-muted); max-width:280px; text-align:right; line-height:1.6; }
+@media (max-width:1000px){ .case-caps{ display:none; } }
+.case-plus{ font-family:var(--mono); font-size:22px; color:var(--text-ink-muted); transition:transform .35s var(--ease), color .3s; justify-self:end; }
+.case.is-open .case-plus{ transform:rotate(45deg); color:var(--brass-bright); }
+.case-detail{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s var(--ease); }
+.case-detail-inner{ overflow:hidden; }
+.case.is-open .case-detail{ grid-template-rows:1fr; }
+.case-detail-content{
+  padding:6px 4px 52px 84px;
+  display:grid; grid-template-columns:repeat(4,1fr); gap:32px;
+  border-top:1px solid var(--ink-line-soft); margin-top:8px; padding-top:34px;
+}
+@media (max-width:1000px){ .case-detail-content{ grid-template-columns:1fr 1fr; padding-left:44px; } }
+@media (max-width:640px){ .case-detail-content{ grid-template-columns:1fr; padding-left:4px; } }
+.case-col h4{
+  font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--brass-bright);
+  margin-bottom:12px; font-weight:500;
+}
+.case-col p{ font-size:14.5px; line-height:1.68; color:var(--text-ink-muted); }
+.case-demonstrates{ grid-column:1 / -1; margin-top:8px; }
+.chips{ display:flex; flex-wrap:wrap; gap:8px; margin-top:4px; }
+.chip{
+  font-family:var(--mono); font-size:11.5px; padding:7px 13px; border:1px solid var(--ink-line);
+  color:var(--text-ink-muted); border-radius:2px;
+}
+.case-note{
+  grid-column:1/-1; font-family:var(--display); font-style:italic; font-size:17px; color:var(--text-ink);
+  padding:18px 22px; border-left:2px solid var(--brass); background:var(--ink-soft); margin-top:4px;
+}
+
+/* ============ PAVASA ============ */
+.pavasa{
+  background:var(--paper);
+  color:var(--text-paper);
+  border-top:1px solid var(--paper-line);
+  border-bottom:1px solid var(--paper-line);
+  position:relative;
+}
+.pavasa-inner{ display:grid; grid-template-columns:.9fr 1.1fr; gap:70px; align-items:start; }
+@media (max-width:900px){ .pavasa-inner{ grid-template-columns:1fr; gap:44px; } }
+.pavasa-word{
+  font-family:var(--display); font-weight:500; font-size:clamp(48px,6vw,84px); line-height:.95; color:var(--text-paper);
+}
+.pavasa-word em{ font-style:italic; color:var(--brass-deep); font-weight:400; }
+.pavasa-tag{ font-family:var(--mono); font-size:13px; letter-spacing:.04em; color:var(--text-paper-muted); margin-top:20px; }
+.pavasa-copy{ margin-top:26px; font-size:16px; line-height:1.75; color:var(--text-paper-muted); max-width:46ch; }
+.pavasa-journey{ margin-top:0; }
+.journey-label{ font-family:var(--mono); font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--brass-deep); margin-bottom:20px; }
+.journey-strip{ display:flex; flex-wrap:wrap; align-items:center; gap:0; }
+.journey-step{
+  font-family:var(--display); font-size:clamp(15px,1.9vw,20px); padding:10px 0; color:var(--text-paper);
+  position:relative;
+}
+.journey-arrow{ font-family:var(--mono); color:var(--brass); margin:0 16px; font-size:15px; opacity:.7; }
+.pavasa-note{
+  margin-top:38px; padding-top:26px; border-top:1px solid var(--paper-line);
+  font-size:14.5px; line-height:1.7; color:var(--text-paper-muted); max-width:50ch;
+}
+
+/* ============ PHILOSOPHY ============ */
+.philosophy-list{ display:flex; flex-direction:column; }
+.principle{
+  display:grid; grid-template-columns:.7fr 1.3fr; gap:50px;
+  padding:44px 0; border-top:1px solid var(--ink-line);
+  opacity:0; transform:translateY(24px);
+  transition:opacity .7s var(--ease), transform .7s var(--ease);
+}
+.principle.is-visible{ opacity:1; transform:none; }
+.philosophy-list .principle:last-child{ border-bottom:1px solid var(--ink-line); }
+@media (max-width:760px){ .principle{ grid-template-columns:1fr; gap:14px; } }
+.principle-head{ font-family:var(--display); font-style:italic; font-weight:400; font-size:clamp(24px,3vw,34px); line-height:1.2; color:var(--text-ink); }
+.principle-body{ font-size:16px; line-height:1.75; color:var(--text-ink-muted); padding-top:6px; max-width:52ch; }
+
+/* ============ HOW I WORK ============ */
+.steps{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--paper-line); border:1px solid var(--paper-line); }
+@media (max-width:860px){ .steps{ grid-template-columns:1fr 1fr; } }
+@media (max-width:520px){ .steps{ grid-template-columns:1fr; } }
+.step{ background:var(--paper); padding:40px 30px; min-height:230px; display:flex; flex-direction:column; justify-content:space-between; }
+.step-num{ font-family:var(--mono); font-size:12.5px; color:var(--brass-deep); }
+.step-name{ font-family:var(--display); font-size:26px; margin-top:22px; }
+.step-desc{ font-family:var(--mono); font-size:12px; letter-spacing:.03em; color:var(--text-paper-muted); margin-top:16px; line-height:1.6; }
+
+/* ============ WHO I CAN HELP ============ */
+.help-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--ink-line); border:1px solid var(--ink-line); }
+@media (max-width:900px){ .help-grid{ grid-template-columns:1fr 1fr; } }
+@media (max-width:600px){ .help-grid{ grid-template-columns:1fr; } }
+.help-card{
+  background:var(--ink); padding:34px 28px; min-height:180px; text-align:left;
+  display:flex; flex-direction:column; justify-content:space-between; gap:22px;
+  transition:background .3s;
+}
+.help-card:hover{ background:var(--ink-soft); }
+.help-q{ font-family:var(--display); font-size:19px; line-height:1.35; color:var(--text-ink); }
+.help-go{ font-family:var(--mono); font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--brass-bright); display:flex; align-items:center; gap:8px; text-decoration:underline; text-underline-offset:3px; }
+.help-go svg{ width:12px; height:12px; transition:transform .3s var(--ease); }
+.help-card:hover .help-go svg{ transform:translateX(4px); }
+
+/* ============ FINAL CTA ============ */
+.cta-section{
+  background:var(--ink);
+  padding:150px 0 90px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.cta-section::before{
+  content:""; position:absolute; inset:0;
+  background:radial-gradient(ellipse 800px 500px at 50% 0%, rgba(91,95,224,.18), transparent 65%);
+}
+.cta-inner{ position:relative; }
+.cta-title{ font-size:clamp(36px,6vw,72px); line-height:1.04; max-width:16ch; margin:0 auto; }
+.cta-sub{ margin:26px auto 0; max-width:480px; font-size:16.5px; line-height:1.7; color:var(--text-ink-muted); }
+.cta-actions{ margin-top:46px; display:flex; gap:18px; justify-content:center; flex-wrap:wrap; }
+.cta-links{
+  margin-top:70px; padding-top:32px; border-top:1px solid var(--ink-line-soft);
+  display:flex; gap:36px; justify-content:center; flex-wrap:wrap;
+  font-family:var(--mono); font-size:12.5px; letter-spacing:.04em; color:var(--text-ink-muted);
+}
+.cta-links a{ border-bottom:1px solid var(--brass); padding-bottom:2px; color:var(--text-ink); transition:color .25s; }
+.cta-links a:hover{ color:var(--brass-bright); }
+
+footer{ background:var(--ink); padding:30px 0 40px; border-top:1px solid var(--ink-line-soft); }
+.footer-inner{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; }
+.footer-inner span{ font-family:var(--mono); font-size:11.5px; color:var(--text-ink-muted); letter-spacing:.03em; }
+
+/* reveal on scroll utility */
+.reveal{ opacity:0; transform:translateY(28px); transition:opacity .8s var(--ease), transform .8s var(--ease); }
+.reveal.is-visible{ opacity:1; transform:none; }
+
+/* flash highlight for jump target */
+.case.flash{ animation:flash 1.4s var(--ease); }
+@keyframes flash{
+  0%{ background:rgba(91,95,224,.20); }
+  100%{ background:transparent; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="#hero" class="nav-mark">Priyanka<span>.</span></a>
+    <div class="nav-links">
+      <a href="#work">Selected Work</a>
+      <a href="#pavasa">Pavasa</a>
+      <a href="#philosophy">Approach</a>
+      <a href="#contact" class="nav-cta">Let's talk</a>
+    </div>
+
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="hero">
+  <div class="wrap">
+    <div class="hero-eyebrow-row"><span class="dot"></span> Product Leadership &amp; Strategy Consulting</div>
+    <h1 class="hero-name">Priyanka<br>Gupta</h1>
+    <div class="hero-role">Product Leader · Product Strategist · Builder</div>
+    <p class="hero-lede">14+ years turning complex, ambiguous problems into products people actually use.</p>
+    <p class="hero-support">From enterprise software and AI to civic technology and consumer businesses, I've built products for very different users and operating environments.</p>
+    <div class="hero-tags">Enterprise <span class="sep">·</span> AI <span class="sep">·</span> SaaS <span class="sep">·</span> Civic Tech <span class="sep">·</span> Consumer</div>
+    <div class="hero-actions">
+      <a href="#contact" class="btn btn-primary">Let's work together</a>
+      <a href="#work" class="btn btn-ghost">View selected work</a>
+    </div>
+    <div class="hero-contact">
+      <a href="https://www.linkedin.com/in/priyanka-gupta-pm/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a href="mailto:priyanks.2311@gmail.com">priyanks.2311@gmail.com</a>
+    </div>
+  </div>
+</header>
+
+<!-- ============ WHAT I DO ============ -->
+<section class="section section--paper" id="what-i-do">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">What I Do</div>
+      <h2 class="section-title">Six ways to bring me in.</h2>
+      <p class="section-sub">Every engagement starts from the same place — a real, often ambiguous problem — and ends somewhere different depending on what the organization actually needs.</p>
+    </div>
+
+    <div class="do-grid reveal">
+      <div class="do-list" id="doList">
+        <!-- JS populated -->
+      </div>
+      <div class="do-visual" id="doVisual">
+        <div>
+          <div class="do-visual-eyebrow">Currently viewing</div>
+          <div class="do-visual-title" id="doVisualTitle">Product Strategy</div>
+          <p class="do-visual-desc" id="doVisualDesc">Helping organizations define product direction, priorities, roadmaps and trade-offs.</p>
+        </div>
+        <div class="do-visual-index" id="doVisualIndex">01</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SELECTED WORK ============ -->
+<section class="section section--ink" id="work">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Selected Work</div>
+      <h2 class="section-title">Five problems, five very different rooms.</h2>
+      <p class="section-sub">Each case study opens into problem, context, what I did, and what it demonstrates. Open one to go deeper.</p>
+    </div>
+    <div class="work-list reveal" id="workList"></div>
+  </div>
+</section>
+
+<!-- ============ PAVASA ============ -->
+<section class="section pavasa" id="pavasa">
+  <div class="wrap">
+    <div class="eyebrow reveal">Building Again</div>
+    <div class="pavasa-inner">
+      <div class="reveal">
+        <div class="pavasa-word">Pav<em>a</em>sa</div>
+        <div class="pavasa-tag">A premium D2C brass home &amp; lifestyle brand.</div>
+        <p class="pavasa-copy">After years of building products inside organizations, I'm now building a consumer brand from zero — as founder, not advisor. Sourcing, manufacturing, design language, brand and commerce, made and owned end to end, running through my family's own brass-manufacturing heritage.</p>
+        <p class="pavasa-copy" style="margin-top:14px;">This section isn't here to sell Pavasa. It's here to show what it means to have skin in the game — to make decisions across an entire business, not just a product.</p>
+      </div>
+      <div class="pavasa-journey reveal">
+        <div class="journey-label">The journey, so far</div>
+        <div class="journey-strip" id="journeyStrip"></div>
+        <p class="pavasa-note">Every material choice, every product photograph, every price decision — mine to make and mine to live with. It's the same discipline as product work, minus the safety net of someone else's P&amp;L.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PHILOSOPHY ============ -->
+<section class="section section--ink" id="philosophy">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Product Philosophy</div>
+      <h2 class="section-title">A few things I hold onto, engagement after engagement.</h2>
+    </div>
+    <div class="philosophy-list" id="philosophyList"></div>
+  </div>
+</section>
+
+<!-- ============ HOW I WORK ============ -->
+<section class="section section--paper" id="how-i-work">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">How I Work</div>
+      <h2 class="section-title">A consulting approach, not a rigid methodology.</h2>
+      <p class="section-sub">The order matters — each step earns the next one. What changes is how long we spend in each, depending on what the organization already knows.</p>
+    </div>
+    <div class="steps reveal" id="stepsGrid"></div>
+  </div>
+</section>
+
+<!-- ============ WHO I CAN HELP ============ -->
+<section class="section section--ink" id="who-i-help">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Who I Can Help</div>
+      <h2 class="section-title">What are you trying to solve?</h2>
+      <p class="section-sub">Pick the one closest to where you are — it'll take you straight to the relevant work.</p>
+    </div>
+    <div class="help-grid reveal" id="helpGrid"></div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="cta-section" id="contact">
+  <div class="wrap cta-inner">
+    <h2 class="cta-title">Let's work together.</h2>
+    <p class="cta-sub">I'm available for selective product strategy, advisory and consulting engagements.</p>
+    <div class="cta-actions">
+      <a href="mailto:priyanks.2311@gmail.com" class="btn btn-primary">Email me</a>
+      <a href="https://www.linkedin.com/in/priyanka-gupta-pm/" target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn ↗</a>
+    </div>
+    <div class="cta-links">
+      <a href="mailto:priyanks.2311@gmail.com">priyanks.2311@gmail.com</a>
+      <a href="https://www.linkedin.com/in/priyanka-gupta-pm/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://docs.google.com/document/d/1A7HJmTHF4L8hRvmCYXF2pTeeLhHVzsmBxjQp_gfcWhw/export?format=pdf" id="resumeLink" target="_blank" rel="noopener">Download résumé ↓</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-inner">
+    <span>Priyanka Gupta — Product Leader, Strategist, Builder</span>
+    <span>Enterprise · AI · SaaS · Civic Tech · Consumer</span>
+  </div>
+</footer>
+
+<script>
+/* ================= DATA ================= */
+
+const doItems = [
+  { name:"Product Strategy", desc:"Helping organizations define product direction, priorities, roadmaps and trade-offs." },
+  { name:"Product Discovery", desc:"Understanding customers, uncovering real problems and validating opportunities before investing in solutions." },
+  { name:"AI Product Strategy", desc:"Identifying where AI can create meaningful customer and business value — rather than adding AI for novelty." },
+  { name:"Product Leadership", desc:"Providing senior product thinking, cross-functional leadership and decision-making support." },
+  { name:"Product & Engineering Transformation", desc:"Helping teams improve product development, SDLC practices, alignment and execution." },
+  { name:"Advisory / Consulting", desc:"Flexible senior product support for organizations that need experienced product leadership without necessarily making a full-time hire." },
+];
+
+const cases = [
+  {
+    id:"dell", index:"01", client:"Dell Technologies", name:"Enterprise Product & Engineering Transformation",
+    caps:["Product Strategy","Conversational AI","Enterprise SaaS Platform","Transformation","Change Management","Execution"],
+    problem:"Dell's global sales organization had no centralized way to do revenue forecasting and strategic decision-making — teams across worldwide divisions were querying and reconciling complex datasets separately, and reports took too long to turn around. At the same time, Dell was pushing teams toward modern SDLC and CI/CD practices, with adoption staying uneven despite the mandate.",
+    context:"Sales leaders needed fast, reliable answers from complex, worldwide datasets to make decisions — and my own team needed a working example of the new way of building software, not just a policy to follow.",
+    action:"I owned the global strategy for a platform used by 1,000+ sales leaders, centralizing revenue forecasting and strategic decision-making across Dell's worldwide divisions. I conceived and led the build of a conversational AI interface that let global teams query complex datasets in plain language, and, separately, was the first person in my organization to actually implement the new SDLC and CI/CD practices with my own team rather than simply following the mandate.",
+    dims:[
+      {label:"Product Impact", value:"Platform serving 1,000+ sales leaders · 50% faster report turnaround via a conversational AI interface · 20% improvement in data consistency"},
+      {label:"Organizational Impact", value:"Became a working example other teams were subsequently expected to follow for SDLC adoption"}
+    ],
+    help:["strategy","align","leadership"]
+  },
+  {
+    id:"osg", index:"02", client:"OSG", name:"Product Growth & Retention",
+    caps:["Product Strategy","0→1 SaaS/PaaS Build","Behavioral Analytics","Retention & Growth","Enterprise Product","SDLC Transformation"],
+    problem:"OSG (Optimal Strategix Group) worked with major enterprise clients — including Philips, P&G and BAT. A key product challenge across these accounts was improving engagement and long-term retention, with no dedicated platform to support it.",
+    context:"User engagement and retention weren't isolated feature requests — they sat at the center of long-term account health, and the platform to address them had to be built from the ground up.",
+    action:"I built O360, a behavioral analytics SaaS + PaaS platform, from concept to a live product deployed across 5+ enterprise clients within 12 months. I identified opportunities to create stronger reasons for users to return and led development of notifications, gamification and rewards as part of a broader engagement and retention strategy — not one-off features — while architecting IP tracking, red-herring logic and bot-filtering frameworks to protect data quality at scale. At the company level, I also introduced and enforced SDLC practices that significantly changed how teams had been working.",
+    note:null,
+    dims:[
+      {label:"Product Impact", value:"12% growth in retention · 20–25% growth in active engagement within the first year · scaled to tens of thousands of concurrent users"},
+      {label:"Organizational Impact", value:"SDLC discipline and tighter product/engineering collaboration across teams"}
+    ],
+    help:["transform"]
+  },
+  {
+    id:"nextiva", index:"03", client:"Nextiva", name:"AI & Omnichannel Customer Experience",
+    caps:["AI Product Management","Conversational AI / IVA","Product Vision","Omnichannel CX","Enterprise SaaS","GA Launch & Scale"],
+    problem:"Customer communication increasingly happened across multiple channels, creating the need for a more unified customer experience.",
+    context:"Voice, SMS, email and social were fragmenting into separate, disconnected conversations with the same customer, spread across a growing agent toolset.",
+    action:"I defined and drove the roadmap for Nextiva's Omnichannel CX Platform, consolidating voice, SMS, email and social into a single agent workspace. I shipped AI agent tools — auto-summarization and smart reply — and deployed IVA workflows that automated routine inquiry resolution, designing bot-to-human handoffs that reduced live-agent load without sacrificing experience quality. The focus wasn't adding AI features for their own sake — it was using AI where it could meaningfully improve the customer interaction.",
+    dims:[
+      {label:"Product Impact", value:"30% reduction in post-call handling time · higher agent throughput and CSAT via AI agent tooling"},
+      {label:"GA Launch & Scale", value:"Scaled the platform from Early Adopter to GA, onboarding 1,300+ customers and converting internal pilots into a revenue-generating product line"}
+    ],
+    help:["ai"]
+  },
+  {
+    id:"saahas", index:"04", client:"Saahas", name:"Human-Centered Product Discovery", featured:true,
+    caps:["Product Discovery","User Research","Civic Technology","Human-Centered Design","0→1 Delivery","Stakeholder Management"],
+    problem:"Saahas works in waste management, and the product needed to serve users with dramatically different levels of exposure to technology — sanitation workers, citizens, and BBMP officials, in Bengaluru.",
+    context:"The real challenge was designing technology for people far outside a traditional technology audience — including sanitation workers with no prior digital-tool experience at all.",
+    action:"I worked directly with these users and stakeholders to understand their real workflows, and helped launch a mobile app plus an IVRS helpline in partnership with BBMP and sanitation workers — converting municipal workflows into a functional tech product that resolved last-mile waste-collection failures, in a resource-constrained environment.",
+    impact:"Reinforced a principle I carry into every engagement since: the workflow people describe isn't always the workflow they actually follow. Technology has to adapt to the user's reality — not expect the user to adapt to technology.",
+    note:"“The workflow people describe isn't always the workflow they actually follow.”",
+    help:["discovery"]
+  },
+  {
+    id:"food", index:"05", client:"Ghar Ki Yaad · 2015", name:"Building a Consumer Business",
+    caps:["Entrepreneurship","0→1 Startup Ops","Customer Acquisition","Hardware + App Build","Unit Economics","Business + Product Thinking"],
+    problem:"In 2015, I co-founded Ghar Ki Yaad, a tech-enabled cloud kitchen — the first time I was responsible for an entire business, not just a product. The model was ahead of where the market was: food-delivery aggregators like Swiggy didn't exist yet, so there was no ready-made platform to plug into.",
+    context:"Food businesses require daily investment in ingredients before any revenue is generated. Demand is unpredictable, ingredients are perishable, and unsold food is a direct financial loss — none of which software lets you automate away.",
+    action:"I built proprietary food-preservation hardware and a B2C app, and ran full-stack operations across supply chain, product and digital growth — sourcing, menu, pricing, and finding and keeping customers myself, without an aggregator to bring them to us. We sold out every single day.",
+    impact:"Hands-on 0→1 startup experience — customer acquisition, and what it takes to launch and run a business end to end — that directly informs how I build and ship products today, plus a principle that still shapes how I think about any business: every day starts from zero.",
+    note:"“Every day starts from zero.”",
+    help:[]
+  },
+];
+
+const principles = [
+  { head:"Start with the problem.", body:"Don't begin with the technology or solution — begin with what's actually broken, for whom, and why it matters." },
+  { head:"Understand reality.", body:"The workflow people describe isn't always the workflow they actually follow. Real behavior beats stated requirements every time." },
+  { head:"Technology is an enabler.", body:"AI is a capability, not a product strategy. It earns its place only where it changes the customer's experience." },
+  { head:"Connect product to business.", body:"A product isn't successful simply because people use it — it has to hold up as a business, too." },
+  { head:"Build for humans.", body:"Great products fit into people's lives and workflows, rather than asking people to reshape themselves around the product." },
+];
+
+const steps = [
+  { num:"01", name:"Understand", tags:"Customer · Business · Context" },
+  { num:"02", name:"Define", tags:"Problem · Opportunity · Priorities" },
+  { num:"03", name:"Decide", tags:"Strategy · Roadmap · Trade-offs" },
+  { num:"04", name:"Build", tags:"Align · Execute · Learn" },
+];
+
+const helpCards = [
+  { q:"We need product strategy.", tag:"strategy" },
+  { q:"We're struggling to understand the real customer problem.", tag:"discovery" },
+  { q:"We want to identify meaningful AI opportunities.", tag:"ai" },
+  { q:"Our product and engineering teams aren't aligned.", tag:"align" },
+  { q:"We need senior product leadership but aren't ready for a full-time hire.", tag:"leadership" },
+  { q:"We're trying to transform an existing product or business.", tag:"transform" },
+];
+
+const journey = ["Market","Product","Design Language","Manufacturing","Brand","Website","Commerce"];
+
+/* ================= RENDER ================= */
+
+const doList = document.getElementById('doList');
+doItems.forEach((item, i) => {
+  const el = document.createElement('div');
+  el.className = 'do-item' + (i===0 ? ' is-active' : '');
+  el.innerHTML = `
+    <button class="do-item-btn" aria-expanded="${i===0}">
+      <span class="do-item-num">${String(i+1).padStart(2,'0')}</span>
+      <span class="do-item-name">${item.name}</span>
+      <span class="do-item-arrow">+</span>
+    </button>
+    <div class="do-item-panel"><div class="do-item-panel-inner"><p class="do-item-desc">${item.desc}</p></div></div>
+  `;
+  const btn = el.querySelector('.do-item-btn');
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.do-item').forEach(d => { if(d!==el){ d.classList.remove('is-active'); d.querySelector('.do-item-btn').setAttribute('aria-expanded','false'); } });
+    el.classList.add('is-active');
+    btn.setAttribute('aria-expanded','true');
+    updateDoVisual(i);
+  });
+  btn.addEventListener('mouseenter', () => updateDoVisual(i));
+  doList.appendChild(el);
+});
+
+function updateDoVisual(i){
+  const item = doItems[i];
+  const titleEl = document.getElementById('doVisualTitle');
+  const descEl = document.getElementById('doVisualDesc');
+  const idxEl = document.getElementById('doVisualIndex');
+  titleEl.style.opacity = 0;
+  descEl.style.opacity = 0;
+  setTimeout(() => {
+    titleEl.textContent = item.name;
+    descEl.textContent = item.desc;
+    idxEl.textContent = String(i+1).padStart(2,'0');
+    titleEl.style.opacity = 1;
+    descEl.style.opacity = 1;
+  }, 120);
+}
+
+const workList = document.getElementById('workList');
+cases.forEach((c) => {
+  const el = document.createElement('article');
+  el.className = 'case';
+  el.id = 'case-' + c.id;
+  el.dataset.help = c.help.join(',');
+
+  let dimsHtml = '';
+  if(c.dims){
+    dimsHtml = c.dims.map(d => `
+      <div class="case-col">
+        <h4>${d.label}</h4>
+        <p>${d.value}</p>
+      </div>
+    `).join('');
+  } else {
+    dimsHtml = `<div class="case-col"><h4>Impact</h4><p>${c.impact}</p></div>`;
+  }
+
+  el.innerHTML = `
+    <button class="case-toggle" aria-expanded="false">
+      <span class="case-index">${c.index}</span>
+      <span class="case-titles">
+        <span class="case-client">${c.client}</span>
+        <span class="case-name">${c.name}</span>
+      </span>
+      <span class="case-caps">${c.caps.join(' · ')}</span>
+      <span class="case-plus">+</span>
+    </button>
+    <div class="case-detail"><div class="case-detail-inner">
+      <div class="case-detail-content">
+        <div class="case-col"><h4>Problem</h4><p>${c.problem}</p></div>
+        <div class="case-col"><h4>Context</h4><p>${c.context}</p></div>
+        <div class="case-col"><h4>What I did</h4><p>${c.action}</p></div>
+        ${c.dims ? '' : ''}
+        ${dimsHtml}
+        ${c.note ? `<div class="case-note">${c.note}</div>` : ''}
+        <div class="case-col case-demonstrates">
+          <div class="chips">${c.caps.map(cap => `<span class="chip">${cap}</span>`).join('')}</div>
+        </div>
+      </div>
+    </div></div>
+  `;
+  const btn = el.querySelector('.case-toggle');
+  btn.addEventListener('click', () => {
+    const open = el.classList.contains('is-open');
+    el.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', String(!open));
+  });
+  workList.appendChild(el);
+});
+
+const philosophyList = document.getElementById('philosophyList');
+principles.forEach(p => {
+  const el = document.createElement('div');
+  el.className = 'principle';
+  el.innerHTML = `<div class="principle-head">${p.head}</div><div class="principle-body">${p.body}</div>`;
+  philosophyList.appendChild(el);
+});
+
+const stepsGrid = document.getElementById('stepsGrid');
+steps.forEach(s => {
+  const el = document.createElement('div');
+  el.className = 'step';
+  el.innerHTML = `<div class="step-num">${s.num}</div><div><div class="step-name">${s.name}</div><div class="step-desc">${s.tags}</div></div>`;
+  stepsGrid.appendChild(el);
+});
+
+const helpGrid = document.getElementById('helpGrid');
+helpCards.forEach(h => {
+  const el = document.createElement('button');
+  el.className = 'help-card';
+  el.innerHTML = `
+    <span class="help-q">${h.q}</span>
+    <span class="help-go">See relevant work
+      <svg viewBox="0 0 12 12" fill="none"><path d="M2 6H10M10 6L6.5 2.5M10 6L6.5 9.5" stroke="currentColor" stroke-width="1.3"/></svg>
+    </span>
+  `;
+  el.addEventListener('click', () => {
+    const matches = cases.filter(c => c.help.includes(h.tag));
+    if(!matches.length) return;
+    const first = document.getElementById('case-' + matches[0].id);
+    document.getElementById('work').scrollIntoView({ behavior:'smooth' });
+    setTimeout(() => {
+      matches.forEach(m => {
+        const caseEl = document.getElementById('case-' + m.id);
+        if(!caseEl.classList.contains('is-open')){
+          caseEl.classList.add('is-open');
+          caseEl.querySelector('.case-toggle').setAttribute('aria-expanded','true');
+        }
+        caseEl.classList.add('flash');
+        setTimeout(() => caseEl.classList.remove('flash'), 1500);
+      });
+      first.scrollIntoView({ behavior:'smooth', block:'start' });
+    }, 550);
+  });
+  helpGrid.appendChild(el);
+});
+
+const journeyStrip = document.getElementById('journeyStrip');
+journey.forEach((step, i) => {
+  const span = document.createElement('span');
+  span.className = 'journey-step';
+  span.textContent = step;
+  journeyStrip.appendChild(span);
+  if(i < journey.length - 1){
+    const arrow = document.createElement('span');
+    arrow.className = 'journey-arrow';
+    arrow.textContent = '→';
+    journeyStrip.appendChild(arrow);
+  }
+});
+
+/* ================= IN-PAGE ANCHOR SCROLLING (prevents new-tab navigation) ================= */
+document.querySelectorAll('a[href^="#"]:not([id="resumeLink"])').forEach(a => {
+  a.addEventListener('click', (e) => {
+    const targetId = a.getAttribute('href');
+    if(targetId.length < 2) return;
+    const target = document.querySelector(targetId);
+    if(target){
+      e.preventDefault();
+      e.stopPropagation();
+      if(e.stopImmediatePropagation) e.stopImmediatePropagation();
+      target.scrollIntoView({ behavior:'smooth' });
+    }
+  }, true);
+});
+
+/* ================= NAV SCROLL STATE ================= */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('is-scrolled', window.scrollY > 40);
+}, { passive:true });
+
+/* ================= REVEAL ON SCROLL ================= */
+const revealEls = document.querySelectorAll('.reveal, .principle');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('is-visible');
+      io.unobserve(entry.target);
+    }
+  });
+}, { threshold:0.12 });
+revealEls.forEach(el => io.observe(el));
+</script>
+</body>
+</html>
