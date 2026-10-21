@@ -601,8 +601,8 @@ const cases = [
     callsLead:"Two calls that weren't strictly mine to make.",
     calls:[
       {
-        head:"Took the migration decision the architect was meant to take.",
-        body:"Earlier in my time at Dell we were moving revenue and amortisation reporting off Oracle onto GoldenGate \u2014 financially critical data, over roughly 12 months. The solution architect had a plan; I set out a different one. The sequence for retiring the old tables, a dual-load so both sides stayed populated through the switch, a full ETL redesign, and reconciliation running the whole way so the business teams never lost sight of their numbers. It went through without a data-loss incident, and the reporting teams never had an outage to notice."
+        head:"Disagreed with the solution architect on how to migrate.",
+        body:"Dell's sales, services, revenue and finance reporting all sat on Teradata \u2014 Informatica pulling from Oracle and flat files into stage tables, SCD Type 2 base tables holding the history, fact tables rebuilt on top. Moving the source to GoldenGate meant touching all of it, on millions of rows a day. The solution architect wanted to modify the existing workflows in place and cut over. I proposed building the new workflow and tables alongside instead: seed the new base tables with a direct dump from the old ones so history came across without reprocessing, then cut over by renaming \u2014 the new tables take the live names, the old ones become _old. Reporting never had to be repointed, rollback was a rename, and the old workflows and tables were dropped only after three weeks of clean runs in production. My senior manager went with mine."
       },
       {
         head:"Implemented the mandate instead of waiting for it to be implemented.",
