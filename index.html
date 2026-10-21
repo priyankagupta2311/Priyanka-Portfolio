@@ -639,7 +639,11 @@ const cases = [
       },
       {
         head:"Disagreed with leadership on a tab label, then went and got the evidence.",
-        body:"A core inbox tab read \u201CCalls & Texts\u201D \u2014 naming channels, while its sibling tabs named audiences. Leadership didn't see a problem. Rather than keep arguing it, I commissioned user research, which showed the label was doing exactly what I suspected, and took the findings back. It shipped as \u201CExternal\u201D, leaving the personal inbox with a coherent All / External / Internal structure."
+        body:"The inbox had two tabs: \u201CCalls & Texts\u201D for conversations with customers, and \u201CInternal\u201D for conversations with the team. One named the channels, the other named who you were talking to \u2014 so the pair never lined up, and the tab for external conversations never actually said so. Leadership didn't see a problem. Rather than keep arguing it, I commissioned user research, which showed the label was doing exactly what I suspected, and took the findings back. It shipped as \u201CExternal\u201D, leaving a clean All / External / Internal."
+      },
+      {
+        head:"Instrumented the analytics before launch, not after.",
+        body:"Product decisions are only as good as the event data sitting behind them, and no team there had got that part right yet. I worked with marketing and business analytics to define the event model for the omnichannel inbox and had it flowing into Statsig from day one, rather than retrofitting it the first time someone asked a question we couldn't answer. Ours became the first product team whose data was correct, and the implementation other teams were pointed to."
       }
     ],
     dims:[
