@@ -272,6 +272,14 @@ h1,h2,h3,h4{ font-family:var(--display); font-weight:500; letter-spacing:-.01em;
 }
 .case-col p{ font-size:14.5px; line-height:1.68; color:var(--text-ink-muted); }
 .case-demonstrates{ grid-column:1 / -1; margin-top:8px; }
+.case-calls{ grid-column:1 / -1; margin-top:10px; }
+.calls-lead{ font-size:14px; line-height:1.6; color:var(--text-ink-muted); margin-bottom:6px; opacity:.85; }
+.calls-grid{ display:grid; grid-template-columns:1fr 1fr; gap:0 44px; }
+@media (max-width:900px){ .calls-grid{ grid-template-columns:1fr; } }
+.call{ padding:17px 0; border-top:1px solid var(--ink-line-soft); }
+.call-head{ font-family:var(--display); font-size:16.5px; line-height:1.3; color:var(--text-ink); margin-bottom:8px; }
+.call-body{ font-size:14.5px; line-height:1.68; color:var(--text-ink-muted); }
+
 .chips{ display:flex; flex-wrap:wrap; gap:8px; margin-top:4px; }
 .chip{
   font-family:var(--mono); font-size:11.5px; padding:7px 13px; border:1px solid var(--ink-line);
@@ -614,7 +622,26 @@ const cases = [
     caps:["AI Product Management","Conversational AI / IVA","Product Vision","Omnichannel CX","Enterprise SaaS","GA Launch & Scale"],
     problem:"Customer communication increasingly happened across multiple channels, creating the need for a more unified customer experience.",
     context:"Voice, SMS, email and social were fragmenting into separate, disconnected conversations with the same customer, spread across a growing agent toolset.",
-    action:"I defined and drove the roadmap for Nextiva's Omnichannel CX Platform, consolidating voice, SMS, email and social into a single agent workspace. I owned model selection for AI summarisation — moving from Deepgram to Gemini 2.0 when production summaries came back vague and dropped key call details, while keeping Deepgram for transcription where it was accurate — and set up quality feedback on both AI surfaces, so what agents did with a suggestion became the signal for how good it actually was. I designed IVA escalation so a customer could always reach a person, or book a callback when no agent was free. I also pulled block-contact from a release when it measurably slowed the app down, despite it being one of the most requested features.",
+    action:"I defined and drove the roadmap for Nextiva's Omnichannel CX Platform, consolidating voice, SMS, email and social into a single agent workspace. I owned model selection for AI summarisation — moving from Deepgram to Gemini 2.0 when production summaries came back vague and dropped key call details, while keeping Deepgram for transcription where it was accurate — and set up quality feedback on both AI surfaces, so what agents did with a suggestion became the signal for how good it actually was. I designed IVA escalation so a customer could always reach a person, or book a callback when no agent was free.",
+    callsLead:"Most of these came from what happened after the product was live, not from the roadmap.",
+    calls:[
+      {
+        head:"Tickets piled up until inbound calls stopped arriving.",
+        body:"A live customer hit the open-ticket ceiling and calls simply stopped coming through. The first ask was to raise the limit \u2014 and we could have, but that only moved the same failure a few weeks out. Instead we built auto-closure driven by admin-defined business rules: after a configurable stretch of inactivity a ticket soft-closes, then closes fully. Agents stopped tidying up by hand, the ceiling stopped being reachable, and reporting got accurate again because tickets no longer sat open long after the work was done."
+      },
+      {
+        head:"Any agent can answer any ticket.",
+        body:"Watching real usage after GA, the assignee field was costing more than it protected \u2014 agents were reassigning tickets just to reply to a customer who was already waiting. We opened it up: any agent can respond on any ticket, regardless of who it belongs to. Speed of resolution is what the customer actually experiences; ownership bookkeeping is an internal concern."
+      },
+      {
+        head:"Pulled block-contact despite the demand for it.",
+        body:"Block-contact was among the most requested features on the platform, and it measurably degraded app performance. I pulled it from the release rather than ship a known regression to paying accounts. Demand is a reason to build something; it isn't a reason to ship it broken."
+      },
+      {
+        head:"Disagreed with leadership on a tab label, then went and got the evidence.",
+        body:"A core inbox tab read \u201CCalls & Texts\u201D \u2014 naming channels, while its sibling tabs named audiences. Leadership didn't see a problem. Rather than keep arguing it, I commissioned user research, which showed the label was doing exactly what I suspected, and took the findings back. It shipped as \u201CExternal\u201D, leaving the personal inbox with a coherent All / External / Internal structure."
+      }
+    ],
     dims:[
       {label:"Product Impact", value:"30% reduction in post-call handling time · higher agent throughput and CSAT via AI agent tooling"},
       {label:"GA Launch & Scale", value:"Scaled from Early Adopter to GA, onboarding 1,300+ paying small-business accounts and converting internal pilots into a revenue-generating product line"}
@@ -791,6 +818,19 @@ cases.forEach((c) => {
     dimsHtml = `<div class="case-col"><h4>Impact</h4><p>${c.impact}</p></div>`;
   }
 
+  let callsHtml = '';
+  if(c.calls){
+    callsHtml = `
+      <div class="case-col case-calls">
+        <h4>Judgement calls</h4>
+        <p class="calls-lead">${c.callsLead || ''}</p>
+        <div class="calls-grid">
+          ${c.calls.map(k => `<div class="call"><div class="call-head">${k.head}</div><p class="call-body">${k.body}</p></div>`).join('')}
+        </div>
+      </div>
+    `;
+  }
+
   el.innerHTML = `
     <button class="case-toggle" aria-expanded="false">
       <span class="case-index">${c.index}</span>
@@ -808,6 +848,7 @@ cases.forEach((c) => {
         <div class="case-col"><h4>What I did</h4><p>${c.action}</p></div>
         ${c.dims ? '' : ''}
         ${dimsHtml}
+        ${callsHtml}
         ${c.note ? `<div class="case-note">${c.note}</div>` : ''}
         <div class="case-col case-demonstrates">
           <div class="chips">${c.caps.map(cap => `<span class="chip">${cap}</span>`).join('')}</div>
