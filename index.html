@@ -598,6 +598,17 @@ const cases = [
     problem:"Dell's global sales organization had no centralized way to do revenue forecasting and strategic decision-making — teams across worldwide divisions were querying and reconciling complex datasets separately, and reports took too long to turn around. At the same time, Dell was pushing teams toward modern SDLC and CI/CD practices, with adoption staying uneven despite the mandate.",
     context:"Sales leaders needed fast, reliable answers from complex, worldwide datasets to make decisions — and my own team needed a working example of the new way of building software, not just a policy to follow.",
     action:"I owned the global strategy for a platform used by 1,000+ sales leaders, centralizing revenue forecasting and strategic decision-making across Dell's worldwide divisions. I conceived and led the build of a conversational AI interface that let global teams query complex datasets in plain language, and, separately, was the first person in my organization to actually implement the new SDLC and CI/CD practices with my own team rather than simply following the mandate.",
+    callsLead:"Two calls that weren't strictly mine to make.",
+    calls:[
+      {
+        head:"Took the migration decision the architect was meant to take.",
+        body:"Earlier in my time at Dell we were moving revenue and amortisation reporting off Oracle onto GoldenGate \u2014 financially critical data, over roughly 12 to 18 months. The solution architect had a plan; I set out a different one. The sequence for retiring the old tables, a dual-load so both sides stayed populated through the switch, a full ETL redesign, and reconciliation running the whole way so the business teams never lost sight of their numbers. It went through without a data-loss incident, and the reporting teams never had an outage to notice."
+      },
+      {
+        head:"Implemented the mandate instead of waiting for it to be implemented.",
+        body:"Dell had pushed teams toward DevOps and CI/CD and adoption stayed patchy \u2014 a policy everyone had read and few had acted on. I came from a software development background, so I learned the toolchain myself, then trained my own team and the engineers joining it. We became the first product team actually working that way, which made us the group others were sent to look at. The mandate moved nothing on its own; a working example did."
+      }
+    ],
     dims:[
       {label:"Product Impact", value:"Platform serving 1,000+ sales leaders · 50% faster report turnaround via a conversational AI interface · 20% improvement in data consistency"},
       {label:"Organizational Impact", value:"Became a working example other teams were subsequently expected to follow for SDLC adoption"}
@@ -611,6 +622,17 @@ const cases = [
     context:"User engagement and retention weren't isolated feature requests — they sat at the center of long-term account health, and the platform to address them had to be built from the ground up.",
     action:"I built O360, a behavioral analytics SaaS + PaaS platform, from concept to a live product deployed across 5+ enterprise clients within 12 months. I identified opportunities to create stronger reasons for users to return and led development of notifications, gamification and rewards as part of a broader engagement and retention strategy — not one-off features — while architecting IP tracking, red-herring logic and bot-filtering frameworks to protect data quality at scale. At the company level, I also introduced and enforced SDLC practices that significantly changed how teams had been working.",
     note:null,
+    callsLead:"One about the product, one about how the whole company shipped.",
+    calls:[
+      {
+        head:"Fixed the delivery process instead of working around it.",
+        body:"Releases happened when they happened. There were no sprint ceremonies, so nobody could say when a demo would be ready or when something would reach UAT \u2014 which meant the CPO and CEO had nothing firm to tell clients, marketing or support. I could have pushed my own product through faster and left the rest alone. Instead I put in a two-week sprint and release cadence across the organisation. It wasn't my remit, and it was the single thing most in everyone else's way."
+      },
+      {
+        head:"Protected the data before anyone thought to ask about it.",
+        body:"O360's entire value was behavioral data that enterprise clients would act on, and that kind of data attracts noise \u2014 bots, duplicate sessions, people gaming the rewards. I had IP tracking, red-herring logic and bot filtering built into the platform rather than treating data quality as something to clean up later. Nobody writes this into a requirements document. They only notice it when the numbers turn out to be wrong."
+      }
+    ],
     dims:[
       {label:"Product Impact", value:"12% growth in retention · 20–25% growth in active engagement within the first year · scaled to tens of thousands of concurrent users"},
       {label:"Organizational Impact", value:"Introduced two-week sprints and a release cadence where there were none — giving the CPO, CEO, marketing and support firm dates for demos and UAT for the first time · managed a product designer and an associate product manager"}
