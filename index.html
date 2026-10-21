@@ -311,6 +311,28 @@ h1,h2,h3,h4{ font-family:var(--display); font-weight:500; letter-spacing:-.01em;
   font-size:14.5px; line-height:1.7; color:var(--text-paper-muted); max-width:50ch;
 }
 
+
+/* ============ PAVASA DEEP DIVE ============ */
+.pv-deep{ margin-top:76px; padding-top:48px; border-top:1px solid var(--paper-line); }
+.pv-deep-head{ font-family:var(--mono); font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--brass-deep); margin-bottom:10px; }
+.pv-deep-title{ font-family:var(--display); font-size:clamp(24px,3vw,34px); font-weight:500; color:var(--text-paper); max-width:30ch; }
+.pv-deep-sub{ margin-top:14px; font-size:15.5px; line-height:1.72; color:var(--text-paper-muted); max-width:62ch; }
+.pv-lenses{ margin-top:42px; border-top:1px solid var(--paper-line); }
+.pv-lens{ border-bottom:1px solid var(--paper-line); }
+.pv-lens-btn{ width:100%; display:flex; align-items:baseline; gap:18px; padding:22px 0; text-align:left; }
+.pv-lens-num{ font-family:var(--mono); font-size:12px; letter-spacing:.08em; color:var(--brass-deep); }
+.pv-lens-name{ font-family:var(--display); font-size:clamp(18px,2.2vw,23px); color:var(--text-paper); flex:1; }
+.pv-lens-sign{ font-family:var(--mono); font-size:19px; color:var(--brass-deep); transition:transform .35s var(--ease); line-height:1; }
+.pv-lens.is-open .pv-lens-sign{ transform:rotate(45deg); }
+.pv-lens-panel{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .42s var(--ease); }
+.pv-lens.is-open .pv-lens-panel{ grid-template-rows:1fr; }
+.pv-lens-panel-inner{ overflow:hidden; }
+.pv-points{ padding:2px 0 30px 44px; display:flex; flex-direction:column; gap:15px; }
+@media (max-width:640px){ .pv-points{ padding-left:0; } }
+.pv-point{ font-size:15px; line-height:1.72; color:var(--text-paper-muted); padding-left:19px; position:relative; max-width:76ch; }
+.pv-point::before{ content:""; position:absolute; left:0; top:11px; width:8px; height:1px; background:var(--brass); }
+.pv-point b{ color:var(--text-paper); font-weight:600; }
+
 /* ============ PHILOSOPHY ============ */
 .philosophy-list{ display:flex; flex-direction:column; }
 .principle{
@@ -479,6 +501,14 @@ footer{ background:var(--ink); padding:30px 0 40px; border-top:1px solid var(--i
         <p class="pavasa-note">Every material choice, every product photograph, every price decision — mine to make and mine to live with. It's the same discipline as product work, minus the safety net of someone else's P&amp;L.</p>
       </div>
     </div>
+
+    <div class="pv-deep reveal">
+      <div class="pv-deep-head">Inside the build</div>
+      <h3 class="pv-deep-title">What building it alone actually involves.</h3>
+      <p class="pv-deep-sub">Not a side project with a landing page. A live system with backups, monitoring, courier integration and an accounting trail — built, run and decided on by one person.</p>
+      <div class="pv-lenses" id="pvLenses"></div>
+    </div>
+
   </div>
 </section>
 
@@ -640,6 +670,64 @@ const helpCards = [
   { q:"Senior product judgement on the calls that are hard to reverse.", tag:"leadership" },
   { q:"Transforming an existing product, team or way of working.", tag:"transform" },
 ];
+
+
+const pvLenses = [
+  { name:"The decisions", points:[
+    "<b>Custom build over Shopify.</b> An India-only catalogue has none of the multi-currency or cross-border shipping that makes a platform worth paying for. Staying custom kept control of the catalogue model and the data.",
+    "<b>No new legal entity.</b> Pavasa runs under Swastik Sales Corporation's existing GST and PAN rather than a separate registration — faster to launch, and invoicing inherits a format that already reconciles with the family business.",
+    "<b>Revenue before checkout.</b> Orders ran through WhatsApp Business and GPay while the payment gateway waited on a business current account. Launch didn't wait for infrastructure.",
+    "<b>Renamed before launch, not after.</b> Pitalya turned out to be in use by another brand. Better to find that at catalogue stage than after the first ad spend.",
+    "<b>Domain deliberately disconnected.</b> pavasa.in is bought but not yet pointed at the site, so an unfinished store stays undiscoverable.",
+    "<b>Positioning widened.</b> It began as Diwali gifting and now covers home decor and brass door hardware — because that is where the catalogue and the early orders actually pointed."
+  ]},
+  { name:"The build", points:[
+    "<b>Stack.</b> React and Tailwind on Netlify, with Supabase Postgres and Storage as a single data layer.",
+    "<b>A schema shaped like how people shop.</b> Products carry multi-tag collection and room fields rather than rigid product types, so one item can sit in several journeys. A separate site_info table holds contact and social details, so copy changes don't need a deploy.",
+    "<b>Navigation.</b> Shop by Collection, Shop by Room, and Shop All Products.",
+    "<b>Blue Dart serviceability — integrated and tested.</b> Pincode is checked before an order can be placed, so nobody pays for something that cannot be delivered to them.",
+    "<b>Transactional email that can't take an order down.</b> Resend is wired so a failed send logs, retries and flags, rather than failing the order sitting behind it.",
+    "<b>Payments in flight.</b> Cashfree hosted checkout, with GST-compliant invoice fields and Tally import/export so the books reconcile with the manufacturing side."
+  ]},
+  { name:"Running it like production", points:[
+    "<b>Nightly automated backups</b> of both database and storage — confirmed working, not assumed.",
+    "<b>Uptime monitoring on Site24x7</b> with email and SMS alerts, tested by triggering them rather than trusting the setup screen.",
+    "<b>Dependabot</b> on monthly dependency checks, with immediate pull requests for security advisories.",
+    "<b>Gated deploys.</b> Netlify auto-publish is locked, so every build is previewed before it goes live.",
+    "<b>GA4 live.</b> Active and new users, geography, which page people land on, and whether they arrived direct or referred.",
+    "<b>A weekly limits review</b> across Netlify credits, Supabase usage, Blue Dart's daily call cap, SMS credits and GitHub Actions minutes — so nothing quietly hits a ceiling mid-order.",
+    "<b>Every flow and integration tested end to end:</b> Blue Dart, Resend, analytics, invoicing and the Tally handoff."
+  ]},
+  { name:"Working with AI", points:[
+    "<b>The site is designed and built with Claude</b>, then hardened in Claude Code — worked through session by session rather than scaffolded once and abandoned.",
+    "<b>The brass products themselves are prototyped in ChatGPT</b> before anything is manufactured. Throwing away a design costs nothing; throwing away a sample costs a production run.",
+    "<b>Debugging runs through Claude</b> when an integration breaks, which is most of what breaks.",
+    "<b>The judgement stays mine.</b> Deciding what to keep, what to discard, and catching where the output is confidently wrong is the actual work. Generating the first version isn't the hard part."
+  ]},
+];
+
+const pvWrap = document.getElementById('pvLenses');
+if (pvWrap) {
+  pvLenses.forEach((lens, i) => {
+    const el = document.createElement('div');
+    el.className = 'pv-lens';
+    el.innerHTML =
+      '<button class="pv-lens-btn" aria-expanded="false">' +
+        '<span class="pv-lens-num">' + String(i+1).padStart(2,'0') + '</span>' +
+        '<span class="pv-lens-name">' + lens.name + '</span>' +
+        '<span class="pv-lens-sign">+</span>' +
+      '</button>' +
+      '<div class="pv-lens-panel"><div class="pv-lens-panel-inner"><div class="pv-points">' +
+        lens.points.map(p => '<p class="pv-point">' + p + '</p>').join('') +
+      '</div></div></div>';
+    const btn = el.querySelector('.pv-lens-btn');
+    btn.addEventListener('click', () => {
+      const open = el.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    pvWrap.appendChild(el);
+  });
+}
 
 const journey = ["Market","Product","Design Language","Manufacturing","Brand","Website","Commerce"];
 
