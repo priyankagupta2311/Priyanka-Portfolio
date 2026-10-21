@@ -680,12 +680,21 @@ const cases = [
     problem:"Saahas works in waste management, and the product needed to serve users with dramatically different levels of exposure to technology — sanitation workers, citizens, and BBMP officials, in Bengaluru.",
     context:"The real challenge was designing technology for people far outside a traditional technology audience — including sanitation workers with no prior digital-tool experience at all.",
     action:"I worked directly with these users and stakeholders to understand their real workflows, and launched a mobile app plus an IVRS helpline in partnership with BBMP — built around the workflows the municipality already had rather than new ones, so officials weren't asked to change how they worked. I scoped and delivered the prototype through an external development agency.",
+    calls:[
+      {
+        head:"Spent weeks on the ground before designing anything.",
+        body:"The users were citizens, BBMP officials and sanitation workers — three groups with almost nothing in common technically, and none of them people I could design for from a desk. I monitored the real collection process on the ground for weeks and ran interviews across all three before building. What got built came out of what I saw and heard, not out of what the brief assumed."
+      },
+      {
+        head:"Built around the municipality's existing process, not a better one.",
+        body:"It would have been easy to design the workflow that should exist and ask BBMP to adopt it. Officials don't have the slack for that, and a product that depends on an organisation changing its habits usually dies quietly. So it mapped onto the routines already in place — which is also why a voice helpline mattered as much as the app."
+      }
+    ],
     dims:[
       {label:"Product Impact", value:"Piloted across one BBMP ward of ~1,000 households · 85%+ collection and segregation"},
       {label:"Scope", value:"30-person org — project coordinators and social media managers reporting in, field staff reporting to the coordinators"}
     ],
-    impact:"Reinforced a principle I've carried into every team since: the workflow people describe isn't always the workflow they actually follow. Technology has to adapt to the user's reality — not expect the user to adapt to technology.",
-    note:"“The workflow people describe isn't always the workflow they actually follow.”",
+    note:"“I watched the work for weeks before I designed anything for it.”",
     help:["discovery"]
   },
   {
@@ -702,7 +711,7 @@ const cases = [
 
 const principles = [
   { head:"Start with the problem.", body:"Don't begin with the technology or solution — begin with what's actually broken, for whom, and why it matters." },
-  { head:"Understand reality.", body:"The workflow people describe isn't always the workflow they actually follow. Real behavior beats stated requirements every time." },
+  { head:"Go and watch the work.", body:"Spend time where the work actually happens before designing for it. At Saahas that meant weeks on the ground and interviews across three very different user groups, before a single screen existed." },
   { head:"Technology is an enabler.", body:"AI is a capability, not a product strategy. It earns its place only where it changes the customer's experience." },
   { head:"Connect product to business.", body:"A product isn't successful simply because people use it — it has to hold up as a business, too." },
   { head:"Build for humans.", body:"Great products fit into people's lives and workflows, rather than asking people to reshape themselves around the product." },
